@@ -154,13 +154,21 @@ class ReactorCell extends React.Component {
 
     render() {
         let x = this.props.x, y = this.props.y;
-        return (<div className="ReactorCell" key={"ReactorCell_" + x + "_" + y} onClick={this.handleClick}>{this.partVisual}</div>);
+        return (<div className="ReactorCell" key={"ReactorCell_" + x + "_" + y} onClick={this.handleClick} onContextMenu={(e) => this.handleContextMenu(e)}>{this.partVisual}</div>);
     }
 
     handleClick() {
         console.debug(`Cell (${this.props.y},${this.props.x}) clicked.`);
         if (!this.state.placedPart && this.props.selectedPart) {
             this.setState({ placedPart: cloneDeep(this.props.selectedPart) });
+        }
+    }
+
+    handleContextMenu(e) {
+        e.preventDefault();
+
+        if (this.state.placedPart) {
+            this.setState({ placedPart: null });
         }
     }
 
