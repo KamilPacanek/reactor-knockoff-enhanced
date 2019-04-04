@@ -1,0 +1,62 @@
+.MainWindow {
+  width: 800px;
+  height: 800px;
+  display: flex;
+  margin: auto;
+  margin-top: 50px;
+
+  & * {
+    box-sizing: border-box;
+  }
+
+  .LeftPanel {
+    width: 150px;
+    .OperationsPanel {
+      height: 200px;
+    }
+    .PartsPanel {
+      height: 600px;
+      .parts-row {
+        display: flex;
+
+        .PartUI {
+          width: 35px;
+          height: 35px;
+          color: #64867a;
+
+          &.selected{
+              background-color: #3a3f48
+          }
+        }
+      }
+    }
+  }
+
+  .RightPanel {
+    width: 650px;
+    .TopInfoPanel {
+      height: 100px;
+    }
+    .ReactorPanel {
+      min-height: 700px;
+      .reactor-row {
+        display: flex;
+        &:first-child > .ReactorCell {
+          border-top: 2px solid darkgray;
+        }
+
+        .ReactorCell {
+          width: 35px;
+          height: 35px;
+          border-bottom: 2px solid darkgray;
+          border-right: 2px solid darkgray;
+          color: #988871;
+
+          &:first-child {
+            border-left: 2px solid darkgray;
+          }
+        }
+      }
+    }
+  }
+}
