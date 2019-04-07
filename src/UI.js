@@ -75,7 +75,7 @@ class PartsPanel extends React.Component {
 
     render() {
         const parts = this.props.parts;
-        const cols = 4;
+        const cols = 3;
         const rows = parts.length / cols;
 
         let grid = new Array(rows);
@@ -184,12 +184,42 @@ const ReactorProps = {
 };
 
 const Parts = [
-    { category: "PowerCell", id: "0001", name: "Cell 1", symbol: "[X1]" },
-    { category: "PowerCell", id: "0002", name: "Cell 2", symbol: "[X2]" },
-    { category: "PowerCell", id: "0003", name: "Cell 3", symbol: "[X3]" },
-    { category: "PowerCell", id: "0004", name: "Cell 4", symbol: "[X4]" },
-    { category: "PowerCell", id: "0005", name: "Cell 5", symbol: "[Y1]" },
-    { category: "PowerCell", id: "0006", name: "Cell 6", symbol: "[Y2]" },
-    { category: "PowerCell", id: "0007", name: "Cell 7", symbol: "[Y3]" },
-    { category: "PowerCell", id: "0008", name: "Cell 8", symbol: "[Y4]" }
+    //Uranium Cells are specific and needs to be treated separately because their cost
+    //is not conforming to the unified cost calculation function
+    { 
+        category: 'FuelCell',
+        id: "cu1", 
+        name: "Single Uranium Cell", 
+        description:"Basic fuel cell. Generates 1 power and 1 heat",
+        symbol: "[U1]" ,
+        baseCost: 10,
+        baseDurability: 15,
+        basePower: 1,
+        baseHeat: 1,
+        stage: 1
+    },
+    {
+        category: 'FuelCell',
+        id: "cu2", 
+        name: "Double Uranium Cell", 
+        description:"Basic fuel cell. Generates 4 power and 8 heat",
+        symbol: "[U2]" ,
+        baseCost: 25,
+        baseDurability: 15,
+        basePower: 4,
+        baseHeat: 8,
+        stage: 2
+    },
+    {
+        category: 'FuelCell',
+        id: "cu3", 
+        name: "Quad Uranium Cell", 
+        description:"Basic fuel cell. Generates 12 power and 36 heat",
+        symbol: "[U4]" ,
+        baseCost: 60,
+        baseDurability: 15,
+        basePower: 12,
+        baseHeat: 36,
+        stage: 3
+    }
 ];
