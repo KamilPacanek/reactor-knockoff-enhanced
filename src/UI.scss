@@ -19,13 +19,13 @@
       .parts-row {
         display: flex;
 
-        .PartUI {
+        .Part {
           width: 35px;
           height: 35px;
           color: #64867a;
 
-          &.selected{
-              background-color: #3a3f48
+          &.selected {
+            background-color: #3a3f48;
           }
         }
       }
