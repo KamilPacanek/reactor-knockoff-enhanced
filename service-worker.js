@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/reactor-knockoff-enhanced/precache-manifest.e78d1ac6fc2e9782cfb9a5d4604bd766.js"
+  "/reactor-knockoff-enhanced/precache-manifest.7992e0e08c95c01f2b0d707b49e442df.js"
 );
 
 workbox.clientsClaim();
