@@ -1,0 +1,62 @@
+[
+    {
+        "name": "area:github",
+        "color": "#e9a195"
+    },
+    {
+        "name": "area:refactor",
+        "color": "#e9a195"
+    },
+    {
+        "name": "area:source-control",
+        "color": "#e9a195"
+    },
+    {
+        "name": "area:tutorial",
+        "color": "#e9a195"
+    },
+    {
+        "name": "status:completed",
+        "color": "#9ecbf3"
+    },
+    {
+        "name": "status:duplicate",
+        "color": "#dce6ef"
+    },
+    {
+        "name": "status:fixed",
+        "color": "#9ecbf3"
+    },
+    {
+        "name": "status:idea",
+        "color": "#e6f3ff"
+    },
+    {
+        "name": "status:in-progress",
+        "color": "#c5def5"
+    },
+    {
+        "name": "status:planned",
+        "color": "#fff4c6"
+    },
+    {
+        "name": "status:rejected",
+        "color": "#d3d6d9"
+    },
+    {
+        "name": "type:bug",
+        "color": "#9ecea5"
+    },
+    {
+        "name": "type:enhancement",
+        "color": "#c2e0c6"
+    },
+    {
+        "name": "type:invalid",
+        "color": "#e6e6e6"
+    },
+    {
+        "name": "type:maintenance",
+        "color": "#c2e0c6"
+    }
+]
