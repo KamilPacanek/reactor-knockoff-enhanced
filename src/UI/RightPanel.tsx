@@ -16,7 +16,7 @@ export class RightPanel extends React.Component<IRightPanelProps, IRightPanelSta
     render() {
         return (
             <div className="RightPanel">
-                <UI.TopInfoPanel showDescriptionFor={this.props.mouseoverPart}/>
+                <UI.TopInfoPanel showInfoOf={this.props.mouseoverPart}/>
                 <UI.ReactorPanel reactorProps={this.props.reactorProps} selectedPart={this.props.selectedPart} />
             </div>
         );

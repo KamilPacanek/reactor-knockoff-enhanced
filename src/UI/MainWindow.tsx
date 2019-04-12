@@ -16,11 +16,7 @@ interface IMainWindowState {
 export class MainWindow extends React.Component<IMainWindowParts, IMainWindowState> {
     constructor(props: IMainWindowParts) {
         super(props);
-
         this.state = {};
-        this.handleSelectedPartChange = this.handleSelectedPartChange.bind(this);
-        this.handleMouseEnterPart = this.handleMouseEnterPart.bind(this);
-        this.handleMouseLeavePart = this.handleMouseLeavePart.bind(this);
     }
 
     render() {
@@ -37,15 +33,15 @@ export class MainWindow extends React.Component<IMainWindowParts, IMainWindowSta
         );
     }
 
-    handleSelectedPartChange(part: Models.IPartDef) {
+    private handleSelectedPartChange = (part: Models.IPartDef) => {
         this.setState({ selectedPart: part });
     }
 
-    handleMouseEnterPart(part: Models.IPartDef) {
+    private handleMouseEnterPart = (part: Models.IPartDef) => {
         this.setState({ mouseoverPart: part });
     }
 
-    handleMouseLeavePart(part: Models.IPartDef) {
+    private handleMouseLeavePart = (part: Models.IPartDef) => {
         this.setState({ mouseoverPart: undefined });
     }
 

@@ -15,14 +15,6 @@ interface IPartsPanelState {
 }
 
 export class PartsPanel extends React.Component<IPartsPanelProps, IPartsPanelState> {
-    constructor(props: IPartsPanelProps) {
-        super(props);
-
-        this.handleSelectedPartChange = this.handleSelectedPartChange.bind(this);
-        this.handleMouseEnterPart = this.handleMouseEnterPart.bind(this);
-        this.handleMouseLeavePart = this.handleMouseLeavePart.bind(this);
-    }
-
     render() {
         const parts = this.props.parts;
         const cols = 3;
@@ -48,15 +40,15 @@ export class PartsPanel extends React.Component<IPartsPanelProps, IPartsPanelSta
         )}</div>)
     };
 
-    handleSelectedPartChange(part: Models.IPartDef) {
+    private handleSelectedPartChange = (part: Models.IPartDef) => {
         this.props.onSelectedPartChange(part);
     }
 
-    handleMouseEnterPart(part: Models.IPartDef) {
+    private handleMouseEnterPart = (part: Models.IPartDef) => {
         this.props.onMouseEnterPart(part);
     }
 
-    handleMouseLeavePart(part: Models.IPartDef) {
+    private handleMouseLeavePart = (part: Models.IPartDef) => {
         this.props.onMouseLeavePart(part);
     }
 }

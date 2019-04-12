@@ -15,14 +15,6 @@ interface ILeftPanelState {
 }
 
 export class LeftPanel extends React.Component<ILeftPanelProps, ILeftPanelState> {
-    constructor(props: ILeftPanelProps) {
-        super(props);
-
-        this.handleSelectedPartChange = this.handleSelectedPartChange.bind(this);
-        this.handleMouseEnterPart = this.handleMouseEnterPart.bind(this);
-        this.handleMouseLeavePart = this.handleMouseLeavePart.bind(this);
-    }
-
     render() {
         return (
             <div className="LeftPanel">
@@ -35,15 +27,15 @@ export class LeftPanel extends React.Component<ILeftPanelProps, ILeftPanelState>
         );
     }
 
-    handleSelectedPartChange(part: Models.IPartDef) {
+    private handleSelectedPartChange = (part: Models.IPartDef) => {
         this.props.onSelectedPartChange(part);
     }
 
-    handleMouseEnterPart(part: Models.IPartDef) {
+    private handleMouseEnterPart = (part: Models.IPartDef) => {
         this.props.onMouseEnterPart(part);
     }
 
-    handleMouseLeavePart(part: Models.IPartDef) {
+    private handleMouseLeavePart = (part: Models.IPartDef) => {
         this.props.onMouseLeavePart(part);
     }
 }

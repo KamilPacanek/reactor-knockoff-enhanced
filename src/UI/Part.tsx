@@ -28,15 +28,15 @@ export class Part extends React.Component<IPartProps, IPartState> {
         );
     }
 
-    handleSelectedPartChange(part: Models.IPartDef | null, isAlreadySelected: boolean) {
+    private handleSelectedPartChange(part: Models.IPartDef | null, isAlreadySelected: boolean) {
         this.props.onSelectedPartChange(isAlreadySelected ? null : part);
     }
 
-    handleMouseEnter(part: Models.IPartDef) {
+    private handleMouseEnter(part: Models.IPartDef) {
         this.props.onMouseEnter(part);
     }
 
-    handleMouseLeaving(part: Models.IPartDef) {
+    private handleMouseLeaving(part: Models.IPartDef) {
         this.props.onMouseLeave(part);
     }
 }
