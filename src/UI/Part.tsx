@@ -7,7 +7,7 @@ interface IPartProps {
     selectedPart?: Models.IPartDef;
     onSelectedPartChange(part: Models.IPartDef | null): void;
     onMouseEnter(part: Models.IPartDef): void;
-    onMouseLeave(part: Models.IPartDef): void;
+    onMouseLeave(): void;
 }
 
 interface IPartState {
@@ -22,7 +22,7 @@ export class Part extends React.Component<IPartProps, IPartState> {
             <div className={"Part " + (isSelected ? "selected" : "")} title={p.name}
                 onClick={() => this.handleSelectedPartChange(p, isSelected)}
                 onMouseEnter={() => this.handleMouseEnter(p)}
-                onMouseLeave={() => this.handleMouseLeaving(p)}>
+                onMouseLeave={this.handleMouseLeaving}>
                 {p.symbol}
             </div>
         );
@@ -36,7 +36,7 @@ export class Part extends React.Component<IPartProps, IPartState> {
         this.props.onMouseEnter(part);
     }
 
-    private handleMouseLeaving(part: Models.IPartDef) {
-        this.props.onMouseLeave(part);
+    private handleMouseLeaving = () => {
+        this.props.onMouseLeave();
     }
 }

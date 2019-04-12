@@ -7,6 +7,8 @@ interface IReactorCellProps {
     selectedPart?: Models.IPartDef;
     x: number;
     y: number;
+    onMouseEnter(part: Models.IPartDef): void;
+    onMouseLeave(): void;
 }
 
 interface IReactorCellState {
@@ -23,9 +25,23 @@ export class ReactorCell extends React.Component<IReactorCellProps, IReactorCell
         let x = this.props.x, y = this.props.y;
         return (<div className="ReactorCell" key={"ReactorCell_" + x + "_" + y}
             onClick={this.handleClick}
-            onContextMenu={this.handleContextMenu}>
+            onContextMenu={this.handleContextMenu}
+            onMouseEnter={this.handleMouseEnter}
+            onMouseLeave={this.handleMouseLeaving}>
             {this.partVisual}
         </div>);
+    }
+
+    private handleMouseEnter = () => {
+        if (this.state.placedPart) {
+            this.props.onMouseEnter(this.state.placedPart);
+        }
+    }
+
+    private handleMouseLeaving = () => {
+        if (this.state.placedPart) {
+            this.props.onMouseLeave();
+        }
     }
 
     private handleClick = () => {

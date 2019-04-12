@@ -6,6 +6,8 @@ import * as UI from './';
 interface IReactorPanelProps {
     reactorProps: Models.IReactorProperties;
     selectedPart?: Models.IPartDef;
+    onMouseEnterPart(part: Models.IPartDef): void;
+    onMouseLeavePart(): void;
 }
 
 interface IReactorPanelState {
@@ -20,7 +22,9 @@ export class ReactorPanel extends React.Component<IReactorPanelProps, IReactorPa
             grid[y] = new Array(props.Cols);
             for (let x = 0; x < props.Cols; x++) {
                 grid[y][x] =
-                    <UI.ReactorCell x={x} y={y} key={"ReactorCell_" + x + "_" + y} selectedPart={this.props.selectedPart} />;
+                    <UI.ReactorCell x={x} y={y} key={"ReactorCell_" + x + "_" + y} selectedPart={this.props.selectedPart}
+                        onMouseEnter={this.handleMouseEnterPart}
+                        onMouseLeave={this.handleMouseLeavePart} />;
             }
         }
 
@@ -30,4 +34,12 @@ export class ReactorPanel extends React.Component<IReactorPanelProps, IReactorPa
             </div>
         )}</div>)
     };
+
+    private handleMouseEnterPart = (part: Models.IPartDef) => {
+        this.props.onMouseEnterPart(part);
+    }
+
+    private handleMouseLeavePart = () => {
+        this.props.onMouseLeavePart();
+    }
 }

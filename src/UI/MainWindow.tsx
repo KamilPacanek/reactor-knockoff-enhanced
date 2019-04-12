@@ -28,7 +28,9 @@ export class MainWindow extends React.Component<IMainWindowParts, IMainWindowSta
                     onMouseLeavePart={this.handleMouseLeavePart} />
                 <UI.RightPanel reactorProps={this.props.reactorDefinition}
                     selectedPart={this.state.selectedPart}
-                    mouseoverPart={this.mouseoverPart} />
+                    mouseoverPart={this.mouseoverPart}
+                    onMouseEnterPart={this.handleMouseEnterPart}
+                    onMouseLeavePart={this.handleMouseLeavePart}  />
             </div>
         );
     }
@@ -41,7 +43,7 @@ export class MainWindow extends React.Component<IMainWindowParts, IMainWindowSta
         this.setState({ mouseoverPart: part });
     }
 
-    private handleMouseLeavePart = (part: Models.IPartDef) => {
+    private handleMouseLeavePart = () => {
         this.setState({ mouseoverPart: undefined });
     }
 

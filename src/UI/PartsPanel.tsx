@@ -8,7 +8,7 @@ interface IPartsPanelProps {
     selectedPart?: Models.IPartDef;
     onSelectedPartChange(part: Models.IPartDef): void;
     onMouseEnterPart(part: Models.IPartDef): void;
-    onMouseLeavePart(part: Models.IPartDef): void;
+    onMouseLeavePart(): void;
 }
 
 interface IPartsPanelState {
@@ -48,7 +48,7 @@ export class PartsPanel extends React.Component<IPartsPanelProps, IPartsPanelSta
         this.props.onMouseEnterPart(part);
     }
 
-    private handleMouseLeavePart = (part: Models.IPartDef) => {
-        this.props.onMouseLeavePart(part);
+    private handleMouseLeavePart = () => {
+        this.props.onMouseLeavePart();
     }
 }
