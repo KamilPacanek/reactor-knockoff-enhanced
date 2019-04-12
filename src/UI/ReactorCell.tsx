@@ -7,6 +7,8 @@ interface IReactorCellProps {
     selectedPart?: Models.IPartDef;
     x: number;
     y: number;
+    onMouseEnter(part: Models.IPartDef): void;
+    onMouseLeave(): void;
 }
 
 interface IReactorCellState {
@@ -16,24 +18,40 @@ interface IReactorCellState {
 export class ReactorCell extends React.Component<IReactorCellProps, IReactorCellState> {
     constructor(props: IReactorCellProps) {
         super(props)
-
         this.state = { placedPart: null };
-        this.handleClick = this.handleClick.bind(this);
     }
 
     render() {
         let x = this.props.x, y = this.props.y;
-        return (<div className="ReactorCell" key={"ReactorCell_" + x + "_" + y} onClick={this.handleClick} onContextMenu={(e: React.MouseEvent) => this.handleContextMenu(e)}>{this.partVisual}</div>);
+        return (<div className="ReactorCell" key={"ReactorCell_" + x + "_" + y}
+            onClick={this.handleClick}
+            onContextMenu={this.handleContextMenu}
+            onMouseEnter={this.handleMouseEnter}
+            onMouseLeave={this.handleMouseLeaving}>
+            {this.partVisual}
+        </div>);
     }
 
-    handleClick() {
+    private handleMouseEnter = () => {
+        if (this.state.placedPart) {
+            this.props.onMouseEnter(this.state.placedPart);
+        }
+    }
+
+    private handleMouseLeaving = () => {
+        if (this.state.placedPart) {
+            this.props.onMouseLeave();
+        }
+    }
+
+    private handleClick = () => {
         console.debug(`Cell (${this.props.y},${this.props.x}) clicked.`);
         if (!this.state.placedPart && this.props.selectedPart) {
             this.setState({ placedPart: cloneDeep(this.props.selectedPart) });
         }
     }
 
-    handleContextMenu(e: React.MouseEvent) {
+    private handleContextMenu = (e: React.MouseEvent) => {
         e.preventDefault();
 
         if (this.state.placedPart) {
@@ -41,7 +59,7 @@ export class ReactorCell extends React.Component<IReactorCellProps, IReactorCell
         }
     }
 
-    get partVisual() {
+    private get partVisual() {
         const p = this.state.placedPart;
         return p ? p.symbol : "";
     }

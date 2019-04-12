@@ -1,10 +1,10 @@
-import React from "react";
-
-import * as UI from "./UI";
-import * as Models from "./Models";
-
 import './App.scss';
 import './UI.scss';
+
+import React from 'react';
+
+import * as Models from './Models';
+import * as UI from './UI';
 
 export default class App extends React.Component {
   render() {
@@ -28,7 +28,7 @@ const Parts: Models.IPartDef[] = [
     category: 'FuelCell',
     id: "cu1",
     name: "Single Uranium Cell",
-    description: "Basic fuel cell. Generates 1 power and 1 heat",
+    description: "Basic fuel cell. Generates 1 power and 1 heat.",
     symbol: "[U1]",
     baseCost: 10,
     baseDurability: 15,
@@ -40,7 +40,7 @@ const Parts: Models.IPartDef[] = [
     category: 'FuelCell',
     id: "cu2",
     name: "Double Uranium Cell",
-    description: "Basic fuel cell. Generates 4 power and 8 heat",
+    description: "Basic fuel cell. Generates 4 power and 8 heat.",
     symbol: "[U2]",
     baseCost: 25,
     baseDurability: 15,
@@ -52,7 +52,7 @@ const Parts: Models.IPartDef[] = [
     category: 'FuelCell',
     id: "cu3",
     name: "Quad Uranium Cell",
-    description: "Basic fuel cell. Generates 12 power and 36 heat",
+    description: "Basic fuel cell. Generates 12 power and 36 heat.",
     symbol: "[U4]",
     baseCost: 60,
     baseDurability: 15,

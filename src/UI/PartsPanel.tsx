@@ -7,18 +7,14 @@ interface IPartsPanelProps {
     parts: Models.IPartDef[];
     selectedPart?: Models.IPartDef;
     onSelectedPartChange(part: Models.IPartDef): void;
+    onMouseEnterPart(part: Models.IPartDef): void;
+    onMouseLeavePart(): void;
 }
 
 interface IPartsPanelState {
 }
 
 export class PartsPanel extends React.Component<IPartsPanelProps, IPartsPanelState> {
-    constructor(props: IPartsPanelProps) {
-        super(props);
-
-        this.handleSelectedPartChange = this.handleSelectedPartChange.bind(this);
-    }
-
     render() {
         const parts = this.props.parts;
         const cols = 3;
@@ -30,7 +26,10 @@ export class PartsPanel extends React.Component<IPartsPanelProps, IPartsPanelSta
             grid[y] = new Array(cols);
             for (let x = 0; x < cols; x++) {
                 let p = parts[y * cols + x];
-                grid[y][x] = <UI.Part part={p} key={p.id} selectedPart={this.props.selectedPart} onSelectedPartChange={this.handleSelectedPartChange} />;
+                grid[y][x] = <UI.Part part={p} key={p.id} selectedPart={this.props.selectedPart}
+                    onSelectedPartChange={this.handleSelectedPartChange}
+                    onMouseEnter={this.handleMouseEnterPart}
+                    onMouseLeave={this.handleMouseLeavePart} />;
             }
         }
 
@@ -41,7 +40,15 @@ export class PartsPanel extends React.Component<IPartsPanelProps, IPartsPanelSta
         )}</div>)
     };
 
-    handleSelectedPartChange(part: Models.IPartDef) {
+    private handleSelectedPartChange = (part: Models.IPartDef) => {
         this.props.onSelectedPartChange(part);
+    }
+
+    private handleMouseEnterPart = (part: Models.IPartDef) => {
+        this.props.onMouseEnterPart(part);
+    }
+
+    private handleMouseLeavePart = () => {
+        this.props.onMouseLeavePart();
     }
 }
