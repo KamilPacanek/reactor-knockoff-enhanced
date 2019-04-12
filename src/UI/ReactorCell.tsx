@@ -23,7 +23,11 @@ export class ReactorCell extends React.Component<IReactorCellProps, IReactorCell
 
     render() {
         let x = this.props.x, y = this.props.y;
-        return (<div className="ReactorCell" key={"ReactorCell_" + x + "_" + y} onClick={this.handleClick} onContextMenu={(e: React.MouseEvent) => this.handleContextMenu(e)}>{this.partVisual}</div>);
+        return (<div className="ReactorCell" key={"ReactorCell_" + x + "_" + y}
+            onClick={this.handleClick}
+            onContextMenu={(e: React.MouseEvent) => this.handleContextMenu(e)}>
+            {this.partVisual}
+        </div>);
     }
 
     handleClick() {

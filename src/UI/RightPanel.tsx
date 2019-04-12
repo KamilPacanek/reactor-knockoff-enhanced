@@ -6,6 +6,7 @@ import * as UI from './';
 interface IRightPanelProps {
     reactorProps: any;
     selectedPart?: Models.IPartDef;
+    mouseoverPart?: Models.IPartDef;
 }
 
 interface IRightPanelState {
@@ -15,7 +16,7 @@ export class RightPanel extends React.Component<IRightPanelProps, IRightPanelSta
     render() {
         return (
             <div className="RightPanel">
-                <UI.TopInfoPanel />
+                <UI.TopInfoPanel showDescriptionFor={this.props.mouseoverPart}/>
                 <UI.ReactorPanel reactorProps={this.props.reactorProps} selectedPart={this.props.selectedPart} />
             </div>
         );
