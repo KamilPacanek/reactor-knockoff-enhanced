@@ -1,5 +1,6 @@
-import React from "react";
-import * as Models from "../Models";
+import React from 'react';
+
+import * as Models from '../Models';
 
 interface IPartProps {
     part: Models.IPartDef;

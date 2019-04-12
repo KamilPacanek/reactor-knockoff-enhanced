@@ -1,6 +1,7 @@
-import React from "react";
-import * as Models from "../Models";
-import cloneDeep from "lodash/cloneDeep";
+import cloneDeep from 'lodash/cloneDeep';
+import React from 'react';
+
+import * as Models from '../Models';
 
 interface IReactorCellProps {
     selectedPart?: Models.IPartDef;

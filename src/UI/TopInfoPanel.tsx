@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export class TopInfoPanel extends React.Component<{}, {}> {
     render() {

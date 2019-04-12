@@ -1,6 +1,7 @@
-import React from "react";
-import * as Models from "../Models";
-import * as UI from "./";
+import React from 'react';
+
+import * as Models from '../Models';
+import * as UI from './';
 
 interface IRightPanelProps {
     reactorProps: any;
