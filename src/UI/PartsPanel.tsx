@@ -33,12 +33,17 @@ export class PartsPanel extends React.Component<IPartsPanelProps, IPartsPanelSta
             }
         }
 
-        return (<div className="PartsPanel">{grid.map((partsRow, rowIndex) =>
-            <div className="parts-row" key={"ReactorRow_" + rowIndex}>
-                {partsRow.map((part: Models.IPartDef) => part)}
-            </div>
-        )}</div>)
+        return (<div className="PartsPanel" onContextMenu={this.handleContextMenu}>
+            {grid.map((partsRow, rowIndex) =>
+                <div className="parts-row" key={"ReactorRow_" + rowIndex}>
+                    {partsRow.map((part: Models.IPartDef) => part)}
+                </div>
+            )}</div>)
     };
+    
+    private handleContextMenu = (e: React.MouseEvent) => {
+        e.preventDefault();
+    }
 
     private handleSelectedPartChange = (part: Models.IPartDef) => {
         this.props.onSelectedPartChange(part);

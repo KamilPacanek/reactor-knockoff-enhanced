@@ -1,11 +1,18 @@
 import React from 'react';
 
+import { IAppState } from '../App';
 import * as Models from '../Models';
 import * as UI from './';
 
 interface IMainWindowParts {
     parts: Models.IPartDef[];
     reactorDefinition: Models.IReactorProperties;
+    gameData: Models.IGameData;
+    appState: IAppState;
+    onPauseClick(): void;
+    onSellEnergyClick(): void;
+    onManualWentHold(): void;
+    onManualWentRelease(): void;
 }
 
 interface IMainWindowState {
@@ -23,14 +30,19 @@ export class MainWindow extends React.Component<IMainWindowParts, IMainWindowSta
         return (
             <div className="MainWindow" >
                 <UI.LeftPanel parts={this.props.parts} selectedPart={this.state.selectedPart}
+                    gameData={this.props.gameData} appState={this.props.appState}
                     onSelectedPartChange={this.handleSelectedPartChange}
                     onMouseEnterPart={this.handleMouseEnterPart}
-                    onMouseLeavePart={this.handleMouseLeavePart} />
+                    onMouseLeavePart={this.handleMouseLeavePart}
+                    onManualWentHold={this.handleManualWentHold}
+                    onManualWentRelease={this.handleManualWentRelease}
+                    onPauseClick={this.handlePauseClick} 
+                    onSellEnergyClick={this.handleSellEnergyClick}/>
                 <UI.RightPanel reactorProps={this.props.reactorDefinition}
                     selectedPart={this.state.selectedPart}
                     mouseoverPart={this.mouseoverPart}
                     onMouseEnterPart={this.handleMouseEnterPart}
-                    onMouseLeavePart={this.handleMouseLeavePart}  />
+                    onMouseLeavePart={this.handleMouseLeavePart} />
             </div>
         );
     }
@@ -49,5 +61,20 @@ export class MainWindow extends React.Component<IMainWindowParts, IMainWindowSta
 
     private get mouseoverPart(): Models.IPartDef | undefined {
         return this.state.mouseoverPart || this.state.selectedPart;
+    }
+
+    private handleManualWentHold = () => {
+        this.props.onManualWentHold();
+    }
+
+    private handleManualWentRelease = () => {
+        this.props.onManualWentRelease();
+    }
+
+    private handlePauseClick = () => {
+        this.props.onPauseClick();
+    }
+    private handleSellEnergyClick = () => {
+        this.props.onSellEnergyClick();
     }
 }

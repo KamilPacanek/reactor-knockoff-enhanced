@@ -16,11 +16,11 @@ interface IReactorPanelState {
 export class ReactorPanel extends React.Component<IReactorPanelProps, IReactorPanelState> {
     render() {
         const props = this.props.reactorProps;
-        let grid = new Array(props.Rows);
+        let grid = new Array(props.rows);
 
-        for (let y = 0; y < props.Rows; y++) {
-            grid[y] = new Array(props.Cols);
-            for (let x = 0; x < props.Cols; x++) {
+        for (let y = 0; y < props.rows; y++) {
+            grid[y] = new Array(props.cols);
+            for (let x = 0; x < props.cols; x++) {
                 grid[y][x] =
                     <UI.ReactorCell x={x} y={y} key={"ReactorCell_" + x + "_" + y} selectedPart={this.props.selectedPart}
                         onMouseEnter={this.handleMouseEnterPart}
