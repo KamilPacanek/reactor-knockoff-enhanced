@@ -14,6 +14,7 @@ interface ILeftPanelProps {
     onMouseEnterPart(part: Models.IPartDef): void;
     onMouseLeavePart(): void;
     onPauseClick(): void;
+    onSellEnergyClick(): void;
     onManualWentHold(): void;
     onManualWentRelease(): void;
 }
@@ -40,7 +41,8 @@ export class LeftPanel extends React.Component<ILeftPanelProps, ILeftPanelState>
                 <UI.OperationsPanel hudData={hudData}
                     onManualWentHold={this.handleManualWentHold}
                     onManualWentRelease={this.handleManualWentRelease}
-                    onPauseClick={this.handlePauseClick} />
+                    onPauseClick={this.handlePauseClick}
+                    onSellEnergyClick={this.handleSellEnergyClick} />
                 <UI.PartsPanel parts={this.props.parts} selectedPart={this.props.selectedPart}
                     onSelectedPartChange={this.handleSelectedPartChange}
                     onMouseEnterPart={this.handleMouseEnterPart}
@@ -71,5 +73,9 @@ export class LeftPanel extends React.Component<ILeftPanelProps, ILeftPanelState>
 
     private handlePauseClick = () => {
         this.props.onPauseClick();
+    }
+
+    private handleSellEnergyClick = () =>{
+        this.props.onSellEnergyClick();
     }
 }

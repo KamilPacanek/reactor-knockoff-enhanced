@@ -9,13 +9,15 @@ import * as UI from './UI';
 export interface IAppState {
   pause: boolean;
   wenting: boolean;
+  moneyOwned: number;
+  currentEnergy: number;
 }
 
 export default class App extends React.Component<{}, IAppState> {
   constructor({ }) {
     super({});
 
-    this.state = { pause: true, wenting: false };
+    this.state = { pause: true, wenting: false, moneyOwned: GameData.moneyOwned, currentEnergy: GameData.currentEnergy };
   }
 
   render() {
@@ -25,7 +27,8 @@ export default class App extends React.Component<{}, IAppState> {
           gameData={GameData} appState={this.state}
           onManualWentHold={this.handleManualWentHold}
           onManualWentRelease={this.handleManualWentRelease}
-          onPauseClick={this.handlePauseClick} />
+          onPauseClick={this.handlePauseClick}
+          onSellEnergyClick={this.handleSellEnergyClick} />
       </div>
     );
   }
@@ -40,6 +43,10 @@ export default class App extends React.Component<{}, IAppState> {
 
   private handleManualWentRelease = () => {
     this.setState({ wenting: false });
+  }
+
+  private handleSellEnergyClick = () => {
+    this.setState({ moneyOwned: this.state.moneyOwned + this.state.currentEnergy, currentEnergy: 0 });
   }
 }
 

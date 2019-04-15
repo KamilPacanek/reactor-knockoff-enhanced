@@ -1,5 +1,5 @@
 .MainWindow {
-  width: 800px;
+  width: 805px;
   height: 800px;
   display: flex;
   margin: auto;
@@ -10,7 +10,7 @@
   }
 
   .LeftPanel {
-    width: 150px;
+    width: 155px;
 
     .OperationsPanel {
       height: 200px;
@@ -40,6 +40,31 @@
 
         div:not(:first-child) {
           font-size: 80%;
+        }
+      }
+
+      .button {
+        font-size: 80%;
+        color: lightslategray;
+
+        &:hover{
+          opacity: 0.9;
+        }
+
+        > * {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .button-icon {
+          width: 1.5em;
+          height: 1.5em;
+        }
+
+        .button-label {
+          font-size: 0.75em;
+          line-height: 0.75em;
         }
       }
 
@@ -81,6 +106,10 @@
 
           &.selected {
             background-color: #3a3f48;
+          }
+          
+          &:hover{
+            opacity: 0.9;
           }
         }
       }

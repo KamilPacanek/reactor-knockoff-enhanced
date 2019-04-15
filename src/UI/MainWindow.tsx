@@ -10,6 +10,7 @@ interface IMainWindowParts {
     gameData: Models.IGameData;
     appState: IAppState;
     onPauseClick(): void;
+    onSellEnergyClick(): void;
     onManualWentHold(): void;
     onManualWentRelease(): void;
 }
@@ -35,7 +36,8 @@ export class MainWindow extends React.Component<IMainWindowParts, IMainWindowSta
                     onMouseLeavePart={this.handleMouseLeavePart}
                     onManualWentHold={this.handleManualWentHold}
                     onManualWentRelease={this.handleManualWentRelease}
-                    onPauseClick={this.handlePauseClick} />
+                    onPauseClick={this.handlePauseClick} 
+                    onSellEnergyClick={this.handleSellEnergyClick}/>
                 <UI.RightPanel reactorProps={this.props.reactorDefinition}
                     selectedPart={this.state.selectedPart}
                     mouseoverPart={this.mouseoverPart}
@@ -71,5 +73,8 @@ export class MainWindow extends React.Component<IMainWindowParts, IMainWindowSta
 
     private handlePauseClick = () => {
         this.props.onPauseClick();
+    }
+    private handleSellEnergyClick = () => {
+        this.props.onSellEnergyClick();
     }
 }
