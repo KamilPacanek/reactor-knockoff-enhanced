@@ -6,19 +6,56 @@ import React from 'react';
 import * as Models from './Models';
 import * as UI from './UI';
 
-export default class App extends React.Component {
+export interface IAppState {
+  pause: boolean;
+  wenting: boolean;
+}
+
+export default class App extends React.Component<{}, IAppState> {
+  constructor({ }) {
+    super({});
+
+    this.state = { pause: true, wenting: false };
+  }
+
   render() {
     return (
       <div className="App">
-        <UI.MainWindow parts={Parts} reactorDefinition={ReactorDefinition} />
+        <UI.MainWindow parts={Parts} reactorDefinition={ReactorDefinition}
+          gameData={GameData} appState={this.state}
+          onManualWentHold={this.handleManualWentHold}
+          onManualWentRelease={this.handleManualWentRelease}
+          onPauseClick={this.handlePauseClick} />
       </div>
     );
   }
+
+  private handlePauseClick = () => {
+    this.setState({ pause: !this.state.pause });
+  }
+
+  private handleManualWentHold = () => {
+    this.setState({ wenting: true });
+  }
+
+  private handleManualWentRelease = () => {
+    this.setState({ wenting: false });
+  }
 }
 
+const GameData: Models.IGameData = {
+  currentHeat: 0,
+  maxHeat: 100,
+  currentEnergy: 0,
+  maxEnergy: 1000,
+  moneyOwned: 0,
+  heatGrowPerTick: 0,
+  energyGrowPerTick: 0
+};
+
 const ReactorDefinition: Models.IReactorProperties = {
-  Rows: 10,
-  Cols: 10
+  rows: 10,
+  cols: 10
 };
 
 const Parts: Models.IPartDef[] = [

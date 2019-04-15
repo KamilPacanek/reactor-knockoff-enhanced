@@ -11,9 +11,64 @@
 
   .LeftPanel {
     width: 150px;
+
     .OperationsPanel {
       height: 200px;
+      font-size: 150%;
+      letter-spacing: 2px;
+
+      > div {
+        display: flex;
+        margin-bottom: 10px;
+      }
+
+      .money-display {
+        color: #abecab;
+      }
+
+      .info {
+        font-size: 0.75em;
+        line-height: 0.75em;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        color: lightslategray;
+
+        div:first-child {
+          margin-bottom: 5px;
+        }
+
+        div:not(:first-child) {
+          font-size: 80%;
+        }
+      }
+
+      .icon {
+        width: 1.5em;
+        height: 1.5em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &.working svg {
+          -webkit-animation: rotation 1s infinite linear;
+
+          @keyframes rotation {
+            from {
+              -webkit-transform: rotate(0deg);
+            }
+            to {
+              -webkit-transform: rotate(359deg);
+            }
+          }
+        }
+
+        &.idle {
+          color: #7c7b7b;
+        }
+      }
     }
+
     .PartsPanel {
       height: 600px;
       .parts-row {
@@ -60,14 +115,14 @@
     }
   }
 
-  .TopInfoPanel{
-    .part-title{
+  .TopInfoPanel {
+    .part-title {
       color: #fffbb7;
       font-weight: bold;
       padding-bottom: 5px;
     }
 
-    .part-desc{
+    .part-desc {
       color: #ffffff;
     }
   }
