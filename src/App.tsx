@@ -14,8 +14,8 @@ export interface IAppState {
 }
 
 export default class App extends React.Component<{}, IAppState> {
-  constructor({ }) {
-    super({});
+  constructor(props: any) {
+    super(props);
 
     this.state = { pause: true, wenting: false, moneyOwned: GameData.moneyOwned, currentEnergy: GameData.currentEnergy };
   }
@@ -69,8 +69,10 @@ const Parts: Models.IPartDef[] = [
   //Uranium Cells are specific and needs to be treated separately because their cost
   //is not conforming to the unified cost calculation function
   {
-    category: 'FuelCell',
+    category: Models.PartCategory.FuelCell,
+    type: Models.PartType.Uranium,
     id: "cu1",
+    uiColor: "#40e141",
     name: "Single Uranium Cell",
     description: "Basic fuel cell. Generates 1 power and 1 heat.",
     symbol: "[U1]",
@@ -81,8 +83,10 @@ const Parts: Models.IPartDef[] = [
     stage: 1
   },
   {
-    category: 'FuelCell',
+    category: Models.PartCategory.FuelCell,
+    type: Models.PartType.Uranium,
     id: "cu2",
+    uiColor: "#15ae16",
     name: "Double Uranium Cell",
     description: "Basic fuel cell. Generates 4 power and 8 heat.",
     symbol: "[U2]",
@@ -93,8 +97,10 @@ const Parts: Models.IPartDef[] = [
     stage: 2
   },
   {
-    category: 'FuelCell',
+    category: Models.PartCategory.FuelCell,
+    type: Models.PartType.Uranium,
     id: "cu3",
+    uiColor: "#038f04",
     name: "Quad Uranium Cell",
     description: "Basic fuel cell. Generates 12 power and 36 heat.",
     symbol: "[U4]",

@@ -1,5 +1,7 @@
 export interface IPartDef {
-    category: string,
+    category: PartCategory,
+    type: PartType;
+    uiColor: string;
     id: string,
     name: string,
     description: string,
@@ -14,7 +16,7 @@ export interface IPartDef {
 export interface IReactorProperties {
     cols: number,
     rows: number
-};
+}
 
 export interface IGameData {
     currentHeat: number;
@@ -24,4 +26,12 @@ export interface IGameData {
     moneyOwned: number;
     heatGrowPerTick: number;
     energyGrowPerTick: number;
+}
+
+export enum PartCategory {
+    FuelCell
+}
+
+export enum PartType {
+    Uranium
 }
