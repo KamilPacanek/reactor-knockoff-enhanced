@@ -1,5 +1,7 @@
 export interface IPartDef {
     category: string,
+    type: string;
+    uiColor: string;
     id: string,
     name: string,
     description: string,

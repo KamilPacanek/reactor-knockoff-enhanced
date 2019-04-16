@@ -47,7 +47,7 @@
         font-size: 80%;
         color: lightslategray;
 
-        &:hover{
+        &:hover {
           opacity: 0.9;
         }
 
@@ -74,6 +74,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        color: #7c7b7b;
 
         &.working svg {
           -webkit-animation: rotation 1s infinite linear;
@@ -98,20 +99,59 @@
       height: 600px;
       .parts-row {
         display: flex;
+      }
+    }
+  }
 
-        .Part {
-          width: 35px;
-          height: 35px;
-          color: #64867a;
+  .Part,
+  .ReactorCell {
+    width: 35px;
+    height: 35px;
+    color: #64867a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-          &.selected {
-            background-color: #3a3f48;
-          }
-          
-          &:hover{
-            opacity: 0.9;
-          }
-        }
+    &.selected {
+      background-color: #3a3f48;
+    }
+
+    &:hover {
+      opacity: 0.9;
+    }
+
+    .uranium-cells {
+      color: #04f305;
+    }
+
+    .fuel-cells-2 {
+      .fuel-cell-0 {
+        margin-right: -4px;
+      }
+      .fuel-cell-1 {
+        margin-left: -4px;
+      }
+    }
+
+    .fuel-cells-4 {
+      font-size: 80%;
+      .fuel-cell-0 {
+        margin-left: 6px;
+        margin-right: -2px;
+        margin-bottom: -4px;
+      }
+      .fuel-cell-1 {
+        margin-left: -4px;
+        margin-bottom: -4px;
+      }
+      .fuel-cell-2 {
+        margin-left: 6px;
+        margin-right: -2px;
+        margin-bottom: 3px;
+      }
+      .fuel-cell-3 {
+        margin-left: -4px;
+        margin-bottom: 3px;
       }
     }
   }

@@ -2,6 +2,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import React from 'react';
 
 import * as Models from '../Models';
+import { PartRenderer } from './PartRenderer';
 
 interface IReactorCellProps {
     selectedPart?: Models.IPartDef;
@@ -15,7 +16,7 @@ interface IReactorCellState {
     placedPart: Models.IPartDef | null;
 }
 
-export class ReactorCell extends React.Component<IReactorCellProps, IReactorCellState> {
+export class ReactorCell extends PartRenderer<IReactorCellProps, IReactorCellState> {
     constructor(props: IReactorCellProps) {
         super(props)
         this.state = { placedPart: null };
@@ -28,7 +29,7 @@ export class ReactorCell extends React.Component<IReactorCellProps, IReactorCell
             onContextMenu={this.handleContextMenu}
             onMouseEnter={this.handleMouseEnter}
             onMouseLeave={this.handleMouseLeaving}>
-            {this.partVisual}
+            {this.state.placedPart ? this.renderPart(this.state.placedPart) : null}
         </div>);
     }
 
@@ -57,10 +58,5 @@ export class ReactorCell extends React.Component<IReactorCellProps, IReactorCell
         if (this.state.placedPart) {
             this.setState({ placedPart: null });
         }
-    }
-
-    private get partVisual() {
-        const p = this.state.placedPart;
-        return p ? p.symbol : "";
     }
 }

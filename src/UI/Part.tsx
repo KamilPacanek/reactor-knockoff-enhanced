@@ -1,6 +1,7 @@
 import React from 'react';
 
 import * as Models from '../Models';
+import { PartRenderer } from './PartRenderer';
 
 interface IPartProps {
     part: Models.IPartDef;
@@ -13,7 +14,7 @@ interface IPartProps {
 interface IPartState {
 }
 
-export class Part extends React.Component<IPartProps, IPartState> {
+export class Part extends PartRenderer<IPartProps, IPartState> {
     render() {
         const p = this.props.part;
         const isSelected = this.props.selectedPart ? this.props.selectedPart.id === p.id : false;
@@ -23,7 +24,7 @@ export class Part extends React.Component<IPartProps, IPartState> {
                 onClick={() => this.handleSelectedPartChange(p, isSelected)}
                 onMouseEnter={() => this.handleMouseEnter(p)}
                 onMouseLeave={this.handleMouseLeaving}>
-                {p.symbol}
+                {this.renderPart(p)}
             </div>
         );
     }
