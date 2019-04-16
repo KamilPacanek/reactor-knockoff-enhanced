@@ -69,8 +69,8 @@ const Parts: Models.IPartDef[] = [
   //Uranium Cells are specific and needs to be treated separately because their cost
   //is not conforming to the unified cost calculation function
   {
-    category: 'FuelCell',
-    type: "Uranium",
+    category: Models.PartCategory.FuelCell,
+    type: Models.PartType.Uranium,
     id: "cu1",
     uiColor: "#40e141",
     name: "Single Uranium Cell",
@@ -83,8 +83,8 @@ const Parts: Models.IPartDef[] = [
     stage: 1
   },
   {
-    category: 'FuelCell',
-    type: "Uranium",
+    category: Models.PartCategory.FuelCell,
+    type: Models.PartType.Uranium,
     id: "cu2",
     uiColor: "#15ae16",
     name: "Double Uranium Cell",
@@ -97,8 +97,8 @@ const Parts: Models.IPartDef[] = [
     stage: 2
   },
   {
-    category: 'FuelCell',
-    type: "Uranium",
+    category: Models.PartCategory.FuelCell,
+    type: Models.PartType.Uranium,
     id: "cu3",
     uiColor: "#038f04",
     name: "Quad Uranium Cell",
