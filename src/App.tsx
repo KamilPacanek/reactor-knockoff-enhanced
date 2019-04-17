@@ -1,6 +1,7 @@
 import './App.scss';
 import './UI.scss';
 
+import cloneDeep from 'lodash/cloneDeep';
 import React from 'react';
 
 import * as Models from './Models';
@@ -11,13 +12,21 @@ export interface IAppState {
   wenting: boolean;
   moneyOwned: number;
   currentEnergy: number;
+  currentHeat: number;
+  ticksPerSecond: number;
 }
 
 export default class App extends React.Component<{}, IAppState> {
+  private timerId: NodeJS.Timeout | undefined;
+
   constructor(props: any) {
     super(props);
 
-    this.state = { pause: true, wenting: false, moneyOwned: GameData.moneyOwned, currentEnergy: GameData.currentEnergy };
+    this.state = {
+      pause: true, wenting: false,
+      moneyOwned: GameData.moneyOwned, currentEnergy: GameData.currentEnergy,
+      currentHeat: GameData.currentHeat, ticksPerSecond: 1
+    };
   }
 
   render() {
@@ -33,7 +42,34 @@ export default class App extends React.Component<{}, IAppState> {
     );
   }
 
+  componentWillUnmount() {
+    this.chronometerStop();
+  }
+
+  private tick = () => {
+    let stateCopy = cloneDeep(this.state);
+    this.calculateHeat(stateCopy);
+    this.calculateEnergy(stateCopy);
+
+    this.setState(stateCopy);
+  }
+
+  private calculateEnergy(state: IAppState) {
+    state.currentEnergy += 1;
+  }
+
+  private calculateHeat(state: IAppState) {
+    state.currentHeat += 1;
+  }
+
   private handlePauseClick = () => {
+    if (this.state.pause) {
+      this.chronometerStart();
+    }
+    else {
+      this.chronometerStop()
+    }
+
     this.setState({ pause: !this.state.pause });
   }
 
@@ -47,6 +83,17 @@ export default class App extends React.Component<{}, IAppState> {
 
   private handleSellEnergyClick = () => {
     this.setState({ moneyOwned: this.state.moneyOwned + this.state.currentEnergy, currentEnergy: 0 });
+  }
+
+  private chronometerStart() {
+    this.chronometerStop();
+    this.timerId = setInterval(this.tick, 1000 / this.state.ticksPerSecond);
+  }
+
+  private chronometerStop() {
+    if (this.timerId) {
+      clearInterval(this.timerId);
+    }
   }
 }
 

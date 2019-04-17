@@ -25,9 +25,9 @@ interface ILeftPanelState {
 export class LeftPanel extends React.Component<ILeftPanelProps, ILeftPanelState> {
     render() {
         var hudData: UIModels.IHudData = {
-            currentEnergy: this.props.gameData.currentEnergy,
+            currentEnergy: this.props.appState.currentEnergy,
             maxEnergy: this.props.gameData.maxEnergy,
-            currentHeat: this.props.gameData.currentHeat,
+            currentHeat: this.props.appState.currentHeat,
             maxHeat: this.props.gameData.maxHeat,
             moneyOwned: this.props.gameData.moneyOwned,
             heatGrowPerTick: this.props.gameData.heatGrowPerTick,
