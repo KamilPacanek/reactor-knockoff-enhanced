@@ -19,7 +19,7 @@ export class OperationsPanel extends React.Component<IOperationsPanelProps, {}> 
         return (
             <div className="OperationsPanel" onContextMenu={this.handleContextMenu}>
                 <div className="heat-meter">
-                    <div className={"icon " + (hudData.wenting ? "working" : "idle")}>
+                    <div className={"icon manual-wenting " + (hudData.wenting ? "working" : "idle")}>
                         <IoMdNuclear onMouseDown={this.handleWentMouseDown} onMouseUp={this.handleWentMouseUp} onMouseLeave={this.handleWentMouseLeave} />
                     </div>
                     <div className="info">
@@ -28,7 +28,7 @@ export class OperationsPanel extends React.Component<IOperationsPanelProps, {}> 
                     </div>
                 </div>
                 <div className="energy-meter">
-                    <div className={"icon " + (hudData.pause ? "idle" : "working")}>
+                    <div className={"icon power-generation " + (hudData.pause ? "idle" : "working")}>
                         <FaReact onClick={this.handlePauseClick} />
                     </div>
                     <div className="info">
