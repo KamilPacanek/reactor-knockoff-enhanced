@@ -1,6 +1,7 @@
 import './App.scss';
 import './UI.scss';
 
+import cloneDeep from 'lodash/cloneDeep';
 import React from 'react';
 
 import * as Models from './Models';
@@ -9,22 +10,23 @@ import * as UI from './UI';
 export interface IAppState {
   pause: boolean;
   wenting: boolean;
-  moneyOwned: number;
-  currentEnergy: number;
+  selling: boolean;
+  numbers: Models.IGameData;
 }
 
 export default class App extends React.Component<{}, IAppState> {
+  private timerId: NodeJS.Timeout | undefined;
+
   constructor(props: any) {
     super(props);
-
-    this.state = { pause: true, wenting: false, moneyOwned: GameData.moneyOwned, currentEnergy: GameData.currentEnergy };
+    this.state = { pause: true, wenting: false, selling: false, numbers: GameData };
   }
 
   render() {
     return (
       <div className="App">
-        <UI.MainWindow parts={Parts} reactorDefinition={ReactorDefinition}
-          gameData={GameData} appState={this.state}
+        <UI.MainWindow parts={Parts} reactorDefinition={this.state.numbers.reactor}
+          appState={this.state}
           onManualWentHold={this.handleManualWentHold}
           onManualWentRelease={this.handleManualWentRelease}
           onPauseClick={this.handlePauseClick}
@@ -33,7 +35,43 @@ export default class App extends React.Component<{}, IAppState> {
     );
   }
 
+  componentWillUnmount() {
+    this.chronometerStop();
+  }
+
+  private tick = () => {
+    let stateCopy = cloneDeep(this.state);
+    this.calculateHeat(stateCopy);
+    this.calculateEnergy(stateCopy);
+    this.sellEnergy(stateCopy);
+
+    this.setState(stateCopy);
+  }
+
+  private calculateEnergy(state: IAppState) {
+    state.numbers.currentEnergy += this.state.numbers.energyGrowPerTick;
+  }
+
+  private calculateHeat(state: IAppState) {
+    state.numbers.currentHeat += this.state.numbers.heatGrowPerTick;
+  }
+
+  private sellEnergy(state: IAppState) {
+    if(state.selling){
+      state.numbers.moneyOwned += state.numbers.currentEnergy;
+      state.numbers.currentEnergy = 0;
+    }
+    state.selling = false;
+  }
+
   private handlePauseClick = () => {
+    if (this.state.pause) {
+      this.chronometerStart();
+    }
+    else {
+      this.chronometerStop()
+    }
+
     this.setState({ pause: !this.state.pause });
   }
 
@@ -46,7 +84,18 @@ export default class App extends React.Component<{}, IAppState> {
   }
 
   private handleSellEnergyClick = () => {
-    this.setState({ moneyOwned: this.state.moneyOwned + this.state.currentEnergy, currentEnergy: 0 });
+    this.setState({ selling: true });
+  }
+
+  private chronometerStart() {
+    this.chronometerStop();
+    this.timerId = setInterval(this.tick, 1000 / this.state.numbers.ticksPerSecond);
+  }
+
+  private chronometerStop() {
+    if (this.timerId) {
+      clearInterval(this.timerId);
+    }
   }
 }
 
@@ -57,12 +106,9 @@ const GameData: Models.IGameData = {
   maxEnergy: 100,
   moneyOwned: 0,
   heatGrowPerTick: 0,
-  energyGrowPerTick: 0
-};
-
-const ReactorDefinition: Models.IReactorProperties = {
-  rows: 10,
-  cols: 10
+  energyGrowPerTick: 0,
+  ticksPerSecond: 1,
+  reactor: { cols: 10, rows: 10 }
 };
 
 const Parts: Models.IPartDef[] = [
@@ -72,7 +118,6 @@ const Parts: Models.IPartDef[] = [
     category: Models.PartCategory.FuelCell,
     type: Models.PartType.Uranium,
     id: "cu1",
-    uiColor: "#40e141",
     name: "Single Uranium Cell",
     description: "Basic fuel cell. Generates 1 power and 1 heat.",
     symbol: "[U1]",
@@ -86,7 +131,6 @@ const Parts: Models.IPartDef[] = [
     category: Models.PartCategory.FuelCell,
     type: Models.PartType.Uranium,
     id: "cu2",
-    uiColor: "#15ae16",
     name: "Double Uranium Cell",
     description: "Basic fuel cell. Generates 4 power and 8 heat.",
     symbol: "[U2]",
@@ -100,7 +144,6 @@ const Parts: Models.IPartDef[] = [
     category: Models.PartCategory.FuelCell,
     type: Models.PartType.Uranium,
     id: "cu3",
-    uiColor: "#038f04",
     name: "Quad Uranium Cell",
     description: "Basic fuel cell. Generates 12 power and 36 heat.",
     symbol: "[U4]",

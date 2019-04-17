@@ -7,7 +7,6 @@ import * as UI from './';
 interface IMainWindowParts {
     parts: Models.IPartDef[];
     reactorDefinition: Models.IReactorProperties;
-    gameData: Models.IGameData;
     appState: IAppState;
     onPauseClick(): void;
     onSellEnergyClick(): void;
@@ -30,14 +29,14 @@ export class MainWindow extends React.Component<IMainWindowParts, IMainWindowSta
         return (
             <div className="MainWindow" >
                 <UI.LeftPanel parts={this.props.parts} selectedPart={this.state.selectedPart}
-                    gameData={this.props.gameData} appState={this.props.appState}
+                    appState={this.props.appState}
                     onSelectedPartChange={this.handleSelectedPartChange}
                     onMouseEnterPart={this.handleMouseEnterPart}
                     onMouseLeavePart={this.handleMouseLeavePart}
                     onManualWentHold={this.handleManualWentHold}
                     onManualWentRelease={this.handleManualWentRelease}
-                    onPauseClick={this.handlePauseClick} 
-                    onSellEnergyClick={this.handleSellEnergyClick}/>
+                    onPauseClick={this.handlePauseClick}
+                    onSellEnergyClick={this.handleSellEnergyClick} />
                 <UI.RightPanel reactorProps={this.props.reactorDefinition}
                     selectedPart={this.state.selectedPart}
                     mouseoverPart={this.mouseoverPart}

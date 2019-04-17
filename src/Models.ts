@@ -1,7 +1,6 @@
 export interface IPartDef {
     category: PartCategory,
     type: PartType;
-    uiColor: string;
     id: string,
     name: string,
     description: string,
@@ -26,6 +25,8 @@ export interface IGameData {
     moneyOwned: number;
     heatGrowPerTick: number;
     energyGrowPerTick: number;
+    ticksPerSecond: number;
+    reactor: IReactorProperties;
 }
 
 export enum PartCategory {

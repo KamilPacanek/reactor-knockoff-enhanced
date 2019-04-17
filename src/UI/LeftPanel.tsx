@@ -8,7 +8,6 @@ import * as UIModels from './Models';
 interface ILeftPanelProps {
     parts: Models.IPartDef[];
     selectedPart?: Models.IPartDef;
-    gameData: Models.IGameData;
     appState: IAppState;
     onSelectedPartChange(part: Models.IPartDef): void;
     onMouseEnterPart(part: Models.IPartDef): void;
@@ -25,13 +24,13 @@ interface ILeftPanelState {
 export class LeftPanel extends React.Component<ILeftPanelProps, ILeftPanelState> {
     render() {
         var hudData: UIModels.IHudData = {
-            currentEnergy: this.props.gameData.currentEnergy,
-            maxEnergy: this.props.gameData.maxEnergy,
-            currentHeat: this.props.gameData.currentHeat,
-            maxHeat: this.props.gameData.maxHeat,
-            moneyOwned: this.props.gameData.moneyOwned,
-            heatGrowPerTick: this.props.gameData.heatGrowPerTick,
-            energyGrowPerTick: this.props.gameData.energyGrowPerTick,
+            currentEnergy: this.props.appState.numbers.currentEnergy,
+            maxEnergy: this.props.appState.numbers.maxEnergy,
+            currentHeat: this.props.appState.numbers.currentHeat,
+            maxHeat: this.props.appState.numbers.maxHeat,
+            moneyOwned: this.props.appState.numbers.moneyOwned,
+            heatGrowPerTick: this.props.appState.numbers.heatGrowPerTick,
+            energyGrowPerTick: this.props.appState.numbers.energyGrowPerTick,
             wenting: this.props.appState.wenting,
             pause: this.props.appState.pause
         };
