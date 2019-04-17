@@ -52,9 +52,9 @@ export default class App extends React.Component<{}, IAppState> {
 
 const GameData: Models.IGameData = {
   currentHeat: 0,
-  maxHeat: 100,
+  maxHeat: 1000,
   currentEnergy: 0,
-  maxEnergy: 1000,
+  maxEnergy: 100,
   moneyOwned: 0,
   heatGrowPerTick: 0,
   energyGrowPerTick: 0
