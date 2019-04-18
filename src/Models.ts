@@ -9,7 +9,8 @@ export interface IPartDef {
     baseDurability: number,
     basePower: number,
     baseHeat: number,
-    stage: number
+    stage: number,
+    currentDurability: number
 }
 
 export interface IReactorProperties {

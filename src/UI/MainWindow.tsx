@@ -20,8 +20,11 @@ interface IMainWindowState {
 }
 
 export class MainWindow extends React.Component<IMainWindowParts, IMainWindowState> {
+    private righPanel: React.RefObject<UI.RightPanel>;
+
     constructor(props: IMainWindowParts) {
         super(props);
+        this.righPanel = React.createRef();
         this.state = {};
     }
 
@@ -37,13 +40,17 @@ export class MainWindow extends React.Component<IMainWindowParts, IMainWindowSta
                     onManualWentRelease={this.handleManualWentRelease}
                     onPauseClick={this.handlePauseClick}
                     onSellEnergyClick={this.handleSellEnergyClick} />
-                <UI.RightPanel reactorProps={this.props.reactorDefinition}
-                    selectedPart={this.state.selectedPart}
+                <UI.RightPanel ref={this.righPanel} reactorProps={this.props.reactorDefinition}
+                    selectedPart={this.state.selectedPart} 
                     mouseoverPart={this.mouseoverPart}
                     onMouseEnterPart={this.handleMouseEnterPart}
                     onMouseLeavePart={this.handleMouseLeavePart} />
             </div>
         );
+    }
+
+    public tickElapsed(appState: IAppState) {
+        this.righPanel.current!.tickElapsed(appState);
     }
 
     private handleSelectedPartChange = (part: Models.IPartDef) => {
