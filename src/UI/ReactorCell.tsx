@@ -26,7 +26,29 @@ export class ReactorCell extends PartRenderer<IReactorCellProps, IReactorCellSta
             onMouseEnter={this.handleMouseEnter}
             onMouseLeave={this.handleMouseLeaving}>
             {this.props.placedPart ? this.renderPart(this.props.placedPart) : null}
+            <div className={"durability-icon " + this.getDurabilityIconClass()}>&nbsp;</div>
         </div>);
+    }
+
+    private getDurabilityIconClass(): string {
+        const part = this.props.placedPart;
+        if (part) {
+            if (part.currentDurability >= 0.5 * part.baseDurability) {
+                return "high";
+            }
+            else if (part.currentDurability < 0.5 * part.baseDurability 
+                && part.currentDurability >= 0.2 * part.baseDurability) {
+                return "medium";
+            }
+            else if(part.currentDurability > 0){
+                return "low";
+            }
+            else{
+                return "depleted";
+            }
+        }
+
+        return "";
     }
 
     private handleMouseEnter = () => {
