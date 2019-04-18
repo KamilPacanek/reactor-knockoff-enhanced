@@ -1,4 +1,3 @@
-import cloneDeep from 'lodash/cloneDeep';
 import React from 'react';
 
 import * as Models from '../Models';
@@ -6,22 +5,19 @@ import { PartRenderer } from './PartRenderer';
 
 interface IReactorCellProps {
     selectedPart?: Models.IPartDef;
+    placedPart: Models.IPartDef | null;
     x: number;
     y: number;
     onMouseEnter(part: Models.IPartDef): void;
     onMouseLeave(): void;
+    onLMBClick(row: number, col: number): void;
+    onRMBClick(row: number, col: number): void;
 }
 
 interface IReactorCellState {
-    placedPart: Models.IPartDef | null;
 }
 
 export class ReactorCell extends PartRenderer<IReactorCellProps, IReactorCellState> {
-    constructor(props: IReactorCellProps) {
-        super(props)
-        this.state = { placedPart: null };
-    }
-
     render() {
         let x = this.props.x, y = this.props.y;
         return (<div className="ReactorCell" key={"ReactorCell_" + x + "_" + y}
@@ -29,34 +25,28 @@ export class ReactorCell extends PartRenderer<IReactorCellProps, IReactorCellSta
             onContextMenu={this.handleContextMenu}
             onMouseEnter={this.handleMouseEnter}
             onMouseLeave={this.handleMouseLeaving}>
-            {this.state.placedPart ? this.renderPart(this.state.placedPart) : null}
+            {this.props.placedPart ? this.renderPart(this.props.placedPart) : null}
         </div>);
     }
 
     private handleMouseEnter = () => {
-        if (this.state.placedPart) {
-            this.props.onMouseEnter(this.state.placedPart);
+        if (this.props.placedPart) {
+            this.props.onMouseEnter(this.props.placedPart);
         }
     }
 
     private handleMouseLeaving = () => {
-        if (this.state.placedPart) {
+        if (this.props.placedPart) {
             this.props.onMouseLeave();
         }
     }
 
     private handleClick = () => {
-        console.debug(`Cell (${this.props.y},${this.props.x}) clicked.`);
-        if (!this.state.placedPart && this.props.selectedPart) {
-            this.setState({ placedPart: cloneDeep(this.props.selectedPart) });
-        }
+        this.props.onLMBClick(this.props.y, this.props.x)
     }
 
     private handleContextMenu = (e: React.MouseEvent) => {
         e.preventDefault();
-
-        if (this.state.placedPart) {
-            this.setState({ placedPart: null });
-        }
+        this.props.onRMBClick(this.props.y, this.props.x)
     }
 }
