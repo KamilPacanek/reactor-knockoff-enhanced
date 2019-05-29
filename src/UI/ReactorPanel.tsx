@@ -53,22 +53,44 @@ export class ReactorPanel extends React.Component<IReactorPanelProps, IReactorPa
 
     public tickElapsed(appState: IAppState) {
         let stateCopy = cloneDeep(this.state);
-        appState.numbers.heatGrowPerTick = 1; //TODO
-        appState.numbers.energyGrowPerTick = 1; //TOD
 
-        this.reduceDurability(stateCopy);
+        this.resetGrowsPerTick(appState.numbers);
+        this.tickElapsedExecute(stateCopy, appState.numbers);
+
         this.setState(stateCopy);
     }
 
-    private reduceDurability(stateCopy: IReactorPanelState) {
+    private resetGrowsPerTick(numbers: Models.IGameData) {
+        numbers.heatGrowPerTick = 0;
+        numbers.energyGrowPerTick = 0;
+    }
+
+    private tickElapsedExecute(stateCopy: IReactorPanelState, numbers: Models.IGameData) {
         const props = this.props.reactorProps;
-        for (let y = 0; y < props.rows; y++){
+        for (let y = 0; y < props.rows; y++) {
             for (let x = 0; x < props.cols; x++) {
-                if(stateCopy.grid[y][x]){
-                    stateCopy.grid[y][x]!.currentDurability--;
+                let part = stateCopy.grid[y][x];
+                if (part) {
+                    this.reduceDurability(part!);
+                    numbers.heatGrowPerTick += this.collectHeat(part!);
+                    numbers.energyGrowPerTick += this.collectEnergy(part!);
                 }
             }
         }
+    }
+
+    private reduceDurability(part: Models.IPartDef) {
+        if (part.currentDurability > 0) {
+            part.currentDurability--;
+        }
+    }
+
+    private collectHeat(part: Models.IPartDef): number {
+        return 0; //TODO
+    }
+
+    private collectEnergy(part: Models.IPartDef): number {
+        return 0; //TODO
     }
 
     private handleMouseEnterPart = (part: Models.IPartDef) => {
