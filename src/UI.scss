@@ -128,6 +128,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 
     &.selected {
       background-color: #3a3f48;
@@ -135,6 +136,28 @@
 
     &:hover {
       opacity: 0.9;
+    }
+
+    .durability-icon {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      right: 1px;
+      bottom: 1px;
+      border-radius: 50%;
+
+      &.high {
+        background-color: #04f305;
+      }
+      &.medium {
+        background-color: yellow;
+      }
+      &.low {
+        background-color: red;
+      }
+      &.depleted {
+        background-color: gray;
+      }
     }
 
     .uranium-cells {
